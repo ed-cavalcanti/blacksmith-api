@@ -20,7 +20,7 @@ export default class UserModel {
   }
 
   public async create(user: User): Promise<User> {
-    const { username, classe, level, password } = user
+    const { username, classe, level, password } = user;
     const query = `INSERT INTO Trybesmith.Users (username, classe, level, password)
       VALUES (?, ?, ?, ?);`;
 
