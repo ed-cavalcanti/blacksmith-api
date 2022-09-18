@@ -7,7 +7,7 @@ const jwtConfig: jwt.SignOptions = {
   algorithm: 'HS256',
 };
 
-export default function createToken(id: number, username: string): string {
+export default function createToken(id: number | undefined, username: string): string {
   const token = jwt.sign({ data: { userId: id, username } }, secret, jwtConfig);
   return token;
 }

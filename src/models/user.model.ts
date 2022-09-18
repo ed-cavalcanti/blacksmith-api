@@ -1,4 +1,4 @@
-import { Pool } from 'mysql2/promise';
+import { Pool, ResultSetHeader } from 'mysql2/promise';
 import User from '../interfaces/user.interface';
 
 export default class UserModel {
@@ -17,5 +17,19 @@ export default class UserModel {
     const [rows] = result;
     const [user] = rows as User[];
     return user;
+  }
+
+  public async create(user: User): Promise<User> {
+    const { username, classe, level, password } = user
+    const query = `INSERT INTO Trybesmith.Users (username, classe, level, password)
+      VALUES (?, ?, ?, ?);`;
+
+    const result = await this.connection
+      .execute<ResultSetHeader>(query, [username, classe, level, password]);
+
+    const [dataInserted] = result;
+    const { insertId: id } = dataInserted;
+
+    return { id, ...user };
   }
 }
