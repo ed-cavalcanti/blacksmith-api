@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import UserService from '../services/user.svc';
+import UserService from '../services/user.service';
 import createToken from '../helpers/token';
 
 export default class UserController {
